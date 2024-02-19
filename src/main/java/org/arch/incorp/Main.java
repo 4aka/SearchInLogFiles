@@ -2,9 +2,9 @@ package org.arch.incorp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Main {
 
@@ -23,6 +23,7 @@ public class Main {
      */
     private static void findErrorsInLogs() {
         List<String> fileNames = getLogFilesNames();
+        String today = getCurrentDate();
 
         // In LOG Files
         for (String fileName : fileNames) {
@@ -36,10 +37,17 @@ public class Main {
                     // Get line for search
                     for(String searchLine : getDataToSearch()) {
 
+                        // TODO add time validation
+                        // Check if the lines start with current date.
                         // Print file name and error
-                        if (line.contains(searchLine.toLowerCase())) {
-                            printFileName(fileName);
+                        if (line.startsWith(today) && line.contains(searchLine.toLowerCase())) {
+                            System.err.println();
+                            System.err.println();
                             printErrorName(searchLine);
+                            printFileName(fileName);
+                            System.err.println("Line with error: " + line);
+                            System.err.println();
+                            System.err.println();
                         }
                     }
                 }
@@ -55,7 +63,6 @@ public class Main {
      * @param fileName
      */
     private static void printFileName(String fileName) {
-        System.err.println("-----------------------------------------------");
         System.err.println("File contains an error: " + fileName);
         System.err.println("-----------------------------------------------");
     }
@@ -66,6 +73,11 @@ public class Main {
      */
     private static void printErrorName(String error) {
         System.err.println("-----------------------------------------------");
+        System.err.println("Error name: " + error);
+        System.err.println("-----------------------------------------------");
+    }
+
+    private static void printLineWhereErrorWasFound(String error) {
         System.err.println("Error name: " + error);
         System.err.println("-----------------------------------------------");
     }
@@ -115,5 +127,13 @@ public class Main {
             }
         }
         return results;
+    }
+
+    private static String getCurrentDate() {
+        // 2024-02-12
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        df.setTimeZone(tz);
+        return df.format(new Date());
     }
 }
