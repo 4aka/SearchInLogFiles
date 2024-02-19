@@ -8,6 +8,10 @@ import java.util.*;
 
 public class Main {
 
+    /*
+    * Add logic for different OS [Win, macOS]
+    */
+
     private static final String SLASH = "\\";
     private static final String SEARCH_LINES_FILE = "searchLines";
     private static final String PROJECT_DIR = System.getProperty("user.dir");
@@ -45,7 +49,7 @@ public class Main {
                             System.err.println();
                             printErrorName(searchLine);
                             printFileName(fileName);
-                            System.err.println("Line with error: " + line);
+                            printLineWhereErrorWasFound(line);
                             System.err.println();
                             System.err.println();
                         }
@@ -57,6 +61,8 @@ public class Main {
             }
         }
     }
+
+    /* PRINTING */
 
     /**
      *
@@ -77,10 +83,16 @@ public class Main {
         System.err.println("-----------------------------------------------");
     }
 
+    /**
+     *
+     * @param error
+     */
     private static void printLineWhereErrorWasFound(String error) {
-        System.err.println("Error name: " + error);
+        System.err.println("Line with error: " + error);
         System.err.println("-----------------------------------------------");
     }
+
+    /* ACTIONS */
 
     /**
      * Read 'searchLines' file line by line
@@ -129,6 +141,10 @@ public class Main {
         return results;
     }
 
+    /**
+     *
+     * @return
+     */
     private static String getCurrentDate() {
         // 2024-02-12
         TimeZone tz = TimeZone.getTimeZone("UTC");
