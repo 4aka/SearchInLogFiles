@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import static org.arch.incorp.PathActions.ZIP_FILE_NAME;
+
 public class ArchiveActions {
 
     /**
@@ -15,7 +17,7 @@ public class ArchiveActions {
      * @throws IOException
      */
     public static void unzipLogsFromArchive() throws IOException {
-        String zipPath = PathActions.USER_DIR + PathActions.getSlash() + "webapp_logs.zip";
+        String zipPath = PathActions.USER_DIR + PathActions.getSlash() + ZIP_FILE_NAME;
         File destinationDir = new File(PathActions.getLogsDirectory());
 
         byte[] buffer = new byte[1024];
@@ -38,9 +40,9 @@ public class ArchiveActions {
                     }
                     // write file content
                     FileOutputStream fos = new FileOutputStream(newFile);
-                    int len;
-                    while ((len = zis.read(buffer)) > 0) {
-                        fos.write(buffer, 0, len);
+                    int bufferLength;
+                    while ((bufferLength = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, bufferLength);
                     }
                     fos.close();
                 }
@@ -50,5 +52,4 @@ public class ArchiveActions {
         zis.closeEntry();
         zis.close();
     }
-
 }

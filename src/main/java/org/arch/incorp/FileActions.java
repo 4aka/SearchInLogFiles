@@ -34,8 +34,7 @@ public class FileActions {
      */
     public static List<String> getLogFilesNames() {
         List<String> results = new ArrayList<>();
-        File[] files = new File(PathActions.LOGS_DIRECTORY).listFiles();
-
+        File[] files = new File(PathActions.LOGS_DIRECTORY_FOR_SEARCH).listFiles();
         for (File file : files) {
             if (file.isFile()) {
                 results.add(file.getName());

@@ -26,7 +26,7 @@ public class Main {
         // In LOG Files
         for (String fileName : fileNames) {
             try {
-                Scanner scanner = new Scanner(new File(PathActions.LOGS_DIRECTORY + fileName));
+                Scanner scanner = new Scanner(new File(PathActions.LOGS_DIRECTORY_FOR_SEARCH + fileName));
 
                 // In file lines
                 while (scanner.hasNextLine()) {
