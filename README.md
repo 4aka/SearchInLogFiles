@@ -1,4 +1,4 @@
-# SearchInLogFiles
+# Setting up
 
 # Install at least Java 8
 # Update file download.bat with cmd steps
