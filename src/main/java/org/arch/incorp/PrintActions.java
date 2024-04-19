@@ -2,7 +2,7 @@ package org.arch.incorp;
 
 public class PrintActions {
 
-    public static void printDataAboutError(String errorName, String fileName, String lineWithError) {
+    public static void printDataAboutTheError(String errorName, String fileName, String lineWithError) {
         printDivider();
         printErrorName(errorName);
         printFileName(fileName);
@@ -46,5 +46,9 @@ public class PrintActions {
     public static void printDivider() {
         System.err.println();
         System.err.println();
+    }
+
+    public static void print(String s) {
+        System.err.println("OUT: " + s);
     }
 }

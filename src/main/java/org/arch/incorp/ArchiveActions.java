@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import static org.arch.incorp.PathActions.*;
 import static org.arch.incorp.PathActions.ZIP_FILE_NAME;
 
 public class ArchiveActions {
@@ -17,10 +18,11 @@ public class ArchiveActions {
      * @throws IOException
      */
     public static void unzipLogsFromArchive() throws IOException {
-        String zipPath = PathActions.USER_DIR + PathActions.getSlash() + ZIP_FILE_NAME;
-        File destinationDir = new File(PathActions.getLogsDirectory());
+        String zipPath = USER_DIR + getSlash() + ZIP_FILE_NAME;
+        File destinationDir = new File(getLogsDirectory());
 
         byte[] buffer = new byte[1024];
+
         ZipInputStream zis = new ZipInputStream(new FileInputStream(zipPath));
         ZipEntry zipEntry = zis.getNextEntry();
 
