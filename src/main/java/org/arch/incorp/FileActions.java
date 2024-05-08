@@ -124,6 +124,7 @@ public class FileActions {
         if(fileNames.size() > 0) {
             for(String fileName : fileNames) {
                 deleteFile(ERRORS_DIRECTORY + getSlash() + fileName);
+                print("files deleted from ERRORS dir");
             }
         }
 
@@ -132,11 +133,13 @@ public class FileActions {
         if(fileNames.size() > 0) {
             for (String fileName : fileNames) {
                 deleteFile(LOGS_DIRECTORY + getSlash() + fileName);
+                print("files deleted from LOGS dir");
             }
         }
 
         // Delete webapp_logs.zip
         deleteFile(PROJECT_DIR + getSlash() + ZIP_FILE_NAME);
+        print("Zip archive deleted from project root");
     }
 
     /**
@@ -151,7 +154,7 @@ public class FileActions {
                     .map(Path::toFile)
                     .forEach(File::delete);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            print("No such file: " + filePath);
         }
     }
 }

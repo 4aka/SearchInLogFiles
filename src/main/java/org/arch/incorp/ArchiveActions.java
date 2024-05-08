@@ -1,14 +1,12 @@
 package org.arch.incorp;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static org.arch.incorp.PathActions.*;
 import static org.arch.incorp.PathActions.ZIP_FILE_NAME;
+import static org.arch.incorp.PrintActions.*;
 
 public class ArchiveActions {
 
@@ -18,12 +16,32 @@ public class ArchiveActions {
      * @throws IOException
      */
     public static void unzipLogsFromArchive() throws IOException {
+        try {
+            print("Waiting for archive downloading...");
+            Thread.sleep(60000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         String zipPath = USER_DIR + getSlash() + ZIP_FILE_NAME;
         File destinationDir = new File(getLogsDirectory());
-
+        ZipInputStream zis = null;
         byte[] buffer = new byte[1024];
 
-        ZipInputStream zis = new ZipInputStream(new FileInputStream(zipPath));
+        try {
+            zis = new ZipInputStream(new FileInputStream(zipPath));
+        } catch (FileNotFoundException e) {
+            print("File not found by path " + zipPath);
+            print("Checking root folder...");
+            zipPath = PROJECT_DIR + getSlash() + ZIP_FILE_NAME;
+
+            try {
+                zis = new ZipInputStream(new FileInputStream(zipPath));
+                print("Extracting...");
+            } catch (FileNotFoundException f) {
+                print("File not fount by path " + zipPath);
+                print("===== Please, copy zip file into project root! =====");
+            }
+        }
         ZipEntry zipEntry = zis.getNextEntry();
 
         while (zipEntry != null) {
@@ -35,7 +53,6 @@ public class ArchiveActions {
                         throw new IOException("Failed to create directory " + newFile);
                     }
                 } else {
-                    // fix for Windows-created archives
                     File parent = newFile.getParentFile();
                     if (!parent.isDirectory() && !parent.mkdirs()) {
                         throw new IOException("Failed to create directory " + parent);

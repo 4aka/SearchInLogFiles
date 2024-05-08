@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.arch.incorp.FileActions.*;
+import static org.arch.incorp.PrintActions.print;
 import static org.arch.incorp.PrintActions.printDataAboutTheError;
 
 public class SearchActions {
@@ -17,6 +18,7 @@ public class SearchActions {
     public static void searchErrorsInLogFiles() {
         List<String> fileNames = getLogFilesNames();
         String today = getCurrentDate();
+        print("Searching errors...");
 
         // In LOG Files
         for (String fileName : fileNames) {

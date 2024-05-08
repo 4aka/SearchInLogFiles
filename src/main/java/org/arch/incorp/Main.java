@@ -12,10 +12,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         // Delete temp files
-        deleteTempFiles();
+         deleteTempFiles();
 
         // Download archive
-        downloadArchiveWithLogs();
+         downloadArchiveWithLogs();
 
         // Extract files
         unzipLogsFromArchive();

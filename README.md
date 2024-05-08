@@ -4,5 +4,6 @@
 ### Install [azure client](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 ### Update file download.bat with cmd steps
 ### Update file searchLines with lines you want to search
+### Default archive name: webapp_logs.zip should be in project root 
 ### Run program src/main/java/org.arch.incorp/Main
 ### Follow the console
